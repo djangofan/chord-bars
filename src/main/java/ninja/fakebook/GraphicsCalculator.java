@@ -102,7 +102,7 @@ public class GraphicsCalculator {
             currentFontSize--;
         }
         Objects.requireNonNull(metrics);
-        graphics.drawRect((int)rectangle.getX(), (int)rectangle.getY(), metrics.stringWidth(text), metrics.getHeight());
+        //graphics.drawRect((int)rectangle.getX(), (int)rectangle.getY(), metrics.stringWidth(text), metrics.getHeight());
         Point fontStartPoint = getFontLocationFromBounds(rectangle, metrics);
         return new FittedFont(font, fontStartPoint, metrics);
     }

@@ -18,8 +18,10 @@ public class BarGenerator {
     private final LineWidth lineWidth;
     private final BarText barText;
     private final GraphicsCalculator graphicsCalculator;
+    private final Font defaultFont;
 
     BarGenerator(int desiredScale, String text, Font font) {
+        this.defaultFont = font;
         this.scale = desiredScale;
         this.lineWidth = LineWidth.getWidth(this.scale);
         if (this.scale < 1 || this.scale > 5) {
@@ -38,6 +40,43 @@ public class BarGenerator {
         useAntialiasing();
         switch (barText.getPartCount()) {
             case 4:
+                if (style.name().equals(DividedBy.QUARTERS_HALF.name())) {
+                  // part 1
+                  QuarterSection triangleR = graphicsCalculator.getSectionOneQuarterTriangle();
+                  FittedFont fittedFontR = graphicsCalculator.getFittedTextOnBarQuarter(barText.getPartOne(), triangleR);
+                  setFont(fittedFontR.getFont());
+                  this.g2d.drawString(barText.getPartOne(), fittedFontR.getX(), fittedFontR.getY());
+                  // part 2
+                  QuarterSection triangleD = graphicsCalculator.getSectionTwoQuarterTriangle();
+                  FittedFont fittedFontD = graphicsCalculator.getFittedTextOnBarQuarter(barText.getSecondPart(), triangleD);
+                  setFont(fittedFontD.getFont());
+                  this.g2d.drawString(barText.getSecondPart(), fittedFontD.getX(), fittedFontD.getY());
+                  // part 2nd half
+                  String secondHalfText = barText.getThirdPart().isBlank() ? barText.getFourthPart() : barText.getThirdPart();
+                  HalfSection triangleRight = graphicsCalculator.getRightHalfTriangle();
+                  FittedFont fittedFont2 = graphicsCalculator.getFittedTextOnBarHalf(secondHalfText, triangleRight);
+                  setFont(fittedFont2.getFont());
+                  this.g2d.drawString(secondHalfText, fittedFont2.getX(), fittedFont2.getY());
+                  break;
+                } else if (style.name().equals(DividedBy.HALF_QUARTERS.name()))  {
+                  // part 1st half
+                  String firstHalfText = barText.getPartOne().isBlank() ? barText.getSecondPart() : barText.getPartOne();
+                  HalfSection triangleLeft = graphicsCalculator.getLeftHalfTriangle();
+                  FittedFont fittedFont1 = graphicsCalculator.getFittedTextOnBarHalf(firstHalfText, triangleLeft);
+                  setFont(fittedFont1.getFont());
+                  this.g2d.drawString(firstHalfText, fittedFont1.getX(), fittedFont1.getY());
+                  // part 3
+                  QuarterSection triangleU = graphicsCalculator.getSectionThreeQuarterTriangle();
+                  FittedFont fittedFontU = graphicsCalculator.getFittedTextOnBarQuarter(barText.getThirdPart(), triangleU);
+                  setFont(fittedFontU.getFont());
+                  this.g2d.drawString(barText.getThirdPart(), fittedFontU.getX(), fittedFontU.getY());
+                  // part 4
+                  QuarterSection triangleL = graphicsCalculator.getSectionFourQuarterTriangle();
+                  FittedFont fittedFontL = graphicsCalculator.getFittedTextOnBarQuarter(barText.getFourthPart(), triangleL);
+                  setFont(fittedFontL.getFont());
+                  this.g2d.drawString(barText.getFourthPart(), fittedFontL.getX(), fittedFontL.getY());
+                  break;
+                }
                 // part 1
                 QuarterSection triangleR = graphicsCalculator.getSectionOneQuarterTriangle();
                 FittedFont fittedFontR = graphicsCalculator.getFittedTextOnBarQuarter(barText.getPartOne(), triangleR);
@@ -147,14 +186,6 @@ public class BarGenerator {
         return this.bufferedImage;
     }
 
-    private void setHeadless() {
-        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        boolean headless_check = ge.isHeadless();
-        if (!headless_check) {
-            System.setProperty("java.awt.headless", "true");
-        }
-    }
-
     private void useAntialiasing() {
         this.g2d.setRenderingHint(
                 RenderingHints.KEY_ANTIALIASING,
@@ -169,7 +200,7 @@ public class BarGenerator {
     public void drawError(String errorMessage) {
         setGraphicsColor(Color.RED);
         drawBackground();
-        Font errorFont = new Font("Courier New", Font.PLAIN, 10);
+        Font errorFont = new Font(this.defaultFont.getFontName(), Font.PLAIN, 10);
         setFont(errorFont);
         setGraphicsColor(Color.WHITE);
         this.g2d.drawString(errorMessage, 5, 14);
