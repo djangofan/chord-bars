@@ -19,4 +19,8 @@ Example:
     https://chord-bars.azurewebsites.net/api/bar?scale=5&bg=fff&fg=000&text=[Dm7b5,Edim7,A6,D7]&font=Pacaembu&style=0
 
 
-    
+
+## Examples
+
+
+![Examples](https://github.com/djangofan/chord-bars/blob/master/grilles.png)
