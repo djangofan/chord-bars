@@ -5,6 +5,10 @@
 
     mvn clean package azure-functions:run
 
+I generally use VSCode Azure integration to run this service locally while debugging.
+
+Also, I use VSCode plugin to upload project to Azure.
+
 ## Usage
 
 Example: 
