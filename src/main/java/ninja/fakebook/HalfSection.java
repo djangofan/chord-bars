@@ -67,18 +67,6 @@ public class HalfSection {
         return (int) Point2D.distance(a.x, a.y, b.x, b.y);
     }
 
-    public int getTextYPosition(int scale) {
-        int allowedHeight = scale *  BarGenerator.HEIGHT_INCREMENT;
-        switch (part) {
-            case ONE:
-                return (int)(allowedHeight * 0.3);
-            case TWO:
-                return (int)(allowedHeight * 0.7);
-            default:
-                return allowedHeight/2;
-        }
-    }
-
     public int getTextMaxXPosition(int scale) {
         return scale *  BarGenerator.WIDTH_INCREMENT;
     }

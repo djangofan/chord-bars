@@ -3,11 +3,6 @@ package ninja.fakebook;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Objects;
 
 public class GraphicsCalculator {
@@ -16,7 +11,7 @@ public class GraphicsCalculator {
     private final Dimension dimension;
     private final int scale;
     private static final double PADDING_ADJUST = 0.86;
-    private static final Rectangle2D INVALID_RECTANGLE = new Rectangle2D.Double(10, 10, 10, 10);
+    private static final Rectangle2D INVALID_RECTANGLE = new Rectangle2D.Double(-1, -1, -1, -1);
     private Font font;
 
     GraphicsCalculator(Graphics2D graphics, Dimension dimension, Font font) {
@@ -94,15 +89,12 @@ public class GraphicsCalculator {
             metrics = createFontMetrics(font);
             int fontHeight = metrics.getHeight();
             int stringWidth = metrics.stringWidth(text) + scale;
-            int outlineYPosition = halfSection.getTextYPosition(scale) + fontHeight; // font y-position starts at bottom of square
             switch (halfSection.getPart()) {
                 case ONE:
-                    System.out.println("1s" + scale + "y" + outlineYPosition + "w" + stringWidth + "h" + fontHeight);
-                    rectangle = getFontBounds(scale, outlineYPosition, stringWidth, fontHeight);
+                    rectangle = getFontBounds(scale, scale, stringWidth, fontHeight);
                     break;
                 case TWO:
-                    System.out.println("2s" + scale + "y" + outlineYPosition + "w" + stringWidth + "h" + fontHeight);
-                    rectangle = getFontBounds(halfSection.getTextMaxXPosition(scale) - (stringWidth + scale), outlineYPosition, stringWidth, fontHeight);
+                    rectangle = getFontBounds(halfSection.getTextMaxXPosition(scale) - (stringWidth + scale), scale * 27, stringWidth, fontHeight);
                     break;
                 default:
                     rectangle = INVALID_RECTANGLE;

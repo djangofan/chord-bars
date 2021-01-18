@@ -83,6 +83,7 @@ public class BarGenerator {
         switch (style) {
             case DOUBLE:
                 drawForwardDiagonal();
+                break;
             case QUARTERS_HALF:
                 drawForwardDiagonal();
                 drawBackwardDiagonalTop();
