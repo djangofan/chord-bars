@@ -113,7 +113,10 @@ public class BarGenerator {
             case 1:
             case 0:
             default:
-                // draw 1 item only
+                String textPartOne = barText.getPartOne() == null ? "%" : barText.getPartOne();
+                FittedFont fittedFont = this.graphicsCalculator.getCenteredTextPositionOnCanvas(textPartOne, defaultFont);
+                setFont(fittedFont.getFont());
+                this.g2d.drawString(textPartOne, fittedFont.getX(), fittedFont.getY());
         }
     }
 

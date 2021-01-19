@@ -29,11 +29,25 @@ public class GraphicsCalculator {
         return this.graphics;
     }
 
-    public Point getCenteredTextPositionOnCanvas(String text) {
-        FontMetrics fm = this.graphics.getFontMetrics();
-        int x = (dimension.width - fm.stringWidth(text)) / 2;
-        int y = (fm.getAscent() + (dimension.height - (fm.getAscent() + fm.getDescent())) / 2);
-        return new Point(x, y);
+    public FittedFont getCenteredTextPositionOnCanvas(String text, Font font) {
+        int fontMaxSize = 72;
+        int fontMinSize = 6;
+        Rectangle2D rectangle;
+        int currentFontSize = fontMaxSize;
+        Font incrementalFont = new Font(font.getFontName(), font.getStyle(), currentFontSize);
+        FontMetrics metrics = createFontMetrics(incrementalFont);
+        while (currentFontSize >= fontMinSize && metrics.stringWidth(text) + (scale*2) >= this.dimension.width - (scale*2)) {
+            incrementalFont = new Font(font.getFontName(), incrementalFont.getStyle(), currentFontSize);
+            metrics = createFontMetrics(incrementalFont);
+            currentFontSize--;
+        }
+        Objects.requireNonNull(metrics);
+        int x = (dimension.width - (metrics.stringWidth(text) + (scale*2))) / 2;
+        int y = (dimension.height/2) - (metrics.getHeight()/2);
+        rectangle = getFontBounds(x, y, metrics.stringWidth(text), metrics.getHeight());
+        //graphics.drawRect((int)rectangle.getX(), (int)rectangle.getY(), metrics.stringWidth(text), metrics.getHeight());
+        Point fontStartPoint = getFontLocationFromBounds(rectangle, metrics);
+        return new FittedFont(incrementalFont, fontStartPoint, metrics);
     }
 
     public FittedFont getFittedTextOnBarQuarter(String text, QuarterSection quarterSection) {
