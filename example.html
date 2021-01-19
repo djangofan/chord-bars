@@ -3,26 +3,26 @@
 <head>
 <script type="text/javascript">
     var server = "chord-bars.azurewebsites.net";
-    var url = "https://" + server + "/api/bar?scale=3&bg=333&fg=bca&font=Serif&style=3";
+    var url = "https://" + server + "/api/bar?scale=3&bg=333&fg=bca&font=Serif&style=3&text=";
 
     window.onload = function() {
-        document.getElementById("cellr1c1").src = url + "&text=[Am6]";
-		document.getElementById("cellr1c2").src = url + "&text=[Dm7b5,Cm7b5,Em7b5,'']";
-		document.getElementById("cellr1c3").src = url + "&text=[Dm7b5,'','B7\u00f8',Edim7]";
-		document.getElementById("cellr1c4").src = url + "&text=[Dm7b5,Edim7]";
-		document.getElementById("cellr1c5").src = url + "&text=[Dm7b5,Edim7]";
-		document.getElementById("cellr1c6").src = url + "&text=[Dm7b5,Edim7]";
-		document.getElementById("cellr1c7").src = url + "&text=[Dm7b5,Edim7]";
-		document.getElementById("cellr1c8").src = url + "&text=[Dm7b5,Edim7]";
+        document.getElementById("cellr1c1").src = url + "[Am6]";
+		document.getElementById("cellr1c2").src = url + "['%25']";
+		document.getElementById("cellr1c3").src = url + "[Dm6]";
+		document.getElementById("cellr1c4").src = url + "['%25']";
+		document.getElementById("cellr1c5").src = url + "[E7]";
+		document.getElementById("cellr1c6").src = url + "['%25']";
+		document.getElementById("cellr1c7").src = url + "[Am6]";
+		document.getElementById("cellr1c8").src = url + "['%25']";
 		
-		document.getElementById("cellr2c1").src = url + "&text=[Em,'Am6/9',B7,E7]";
-		document.getElementById("cellr2c2").src = url + "&text=[Dm7b5,Cm7b5,Em7b5,'']";
-		document.getElementById("cellr2c3").src = url + "&text=[Dm7b5,'','B7\u00f8',Edim7]";
-		document.getElementById("cellr2c4").src = url + "&text=[Dm7b5,Edim7]";
-		document.getElementById("cellr2c5").src = url + "&text=[Dm7b5,Edim7]";
-		document.getElementById("cellr2c6").src = url + "&text=[Dm7b5,Edim7]";
-		document.getElementById("cellr2c7").src = url + "&text=[Dm7b5,Edim7]";
-		document.getElementById("cellr2c8").src = url + "&text=[Dm7b5,Edim7]";
+		document.getElementById("cellr2c1").src = url + "[Dm6]";
+		document.getElementById("cellr2c2").src = url + "['%25']";
+		document.getElementById("cellr2c3").src = url + "[Am6]";
+		document.getElementById("cellr2c4").src = url + "['%25']";
+		document.getElementById("cellr2c5").src = url + "[E7]";
+		document.getElementById("cellr2c6").src = url + "['%25']";
+		document.getElementById("cellr2c7").src = url + "[Am6]";
+		document.getElementById("cellr2c8").src = url + "[E7]";
     };
 </script>
 </head>
@@ -30,7 +30,8 @@
 <BODY style="background-color:grey;">
 
 
-<p>Song Name</p>
+<H1>Minor Swing</H1>
+<H3>Django Reinhardt</H3>
 <div>
     <img id='cellr1c1' src="">
     <img id='cellr1c2' src="">
