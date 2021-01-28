@@ -22,5 +22,6 @@ Example:
 
 ## Examples
 
+Download the `example.html` and open it on your local machine.
 
 ![Examples](https://github.com/djangofan/chord-bars/blob/master/grilles.png)
